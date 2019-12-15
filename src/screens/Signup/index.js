@@ -42,6 +42,8 @@ import Constants from "expo-constants";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 
+// TODO:
+// Setup redux
 export default class Signup extends Component {
   constructor(props) {
     super(props);
@@ -74,7 +76,30 @@ export default class Signup extends Component {
     this.onChangeText = this.onChangeText.bind(this);
     this.validateEmail = this.validateEmail.bind(this);
     this._getLocationAsync = this._getLocationAsync.bind(this);
+    this.onVerify = this.onVerify.bind(this);
   }
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      this._keyboardDidShow
+    );
+  }
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+  }
+  /* ============================
+  Keyboard dismiss logic function 
+  ==============================*/
+  _keyboardDidShow = () => {
+    this.setState({ keyboardOpened: true });
+  };
+  _keyboardDismiss = () => {
+    if (this.state.keyboardOpened) {
+      // console.log("Dismissing keyboard");
+      Keyboard.dismiss();
+      this.setState({ keyboardOpened: false });
+    }
+  };
   // Used to re-render the screen when press on tab from Auth routes index.js
   UNSAFE_componentWillReceiveProps() {
     this.setState({ index: 0 });
@@ -137,7 +162,20 @@ export default class Signup extends Component {
       });
     }
   }
-
+  onVerify() {
+    console.log("Hitting verify");
+    this.props.navigation.navigate("Loading", {
+      request: "signup",
+      email: this.state.email,
+      password: this.state.password,
+      longitude: this.state.longitude,
+      latitude: this.state.latitude,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      birthday: this.state.birthday,
+      gender: this.state.gender
+    });
+  }
   onBack() {
     // console.log('before', this.state.index);
     switch (this.state.index) {
@@ -205,7 +243,11 @@ export default class Signup extends Component {
   };
   render() {
     return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <TouchableWithoutFeedback
+        onPress={Keyboard.dismiss}
+        accessible={false}
+        touchSoundDisabled={true}
+      >
         <Container>
           {/* Go back button, only shows past first signup screeen */}
           {this.state.index != 0 && this.state.index <= 8 && (
@@ -233,13 +275,12 @@ export default class Signup extends Component {
                   {/* <Ionicons name="ios-fitness" size={40} /> */}
                   Welcome to Fitter
                 </HeaderText>
-                <SubHeaderText>Sign up to continue</SubHeaderText>
               </HeaderView>
-              <Button title="Sign Up" onPress={() => this.onContinue("")} />
               <SubHeaderText>
                 By tapping Sign Up, you agree with our Terms of Service and
                 Privacy Policy
               </SubHeaderText>
+              <Button title="Sign Up" onPress={() => this.onContinue("")} />
             </Container>
           )}
           {/* Location */}
@@ -565,7 +606,10 @@ export default class Signup extends Component {
                 <SummaryHeader>Gender</SummaryHeader>
                 <SummaryText>{this.state.gender}</SummaryText>
 
-                <TouchableOpacity style={{ marginTop: 10 }}>
+                <TouchableOpacity
+                  onPress={this.onVerify}
+                  style={{ marginTop: 10 }}
+                >
                   <ButtonContainer>
                     <ButtonText>Confirm</ButtonText>
                   </ButtonContainer>

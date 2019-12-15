@@ -44,15 +44,15 @@ export const HeaderText = styled.Text`
   font-weight: bold;
   letter-spacing: 1;
   color: white;
-  border-style: solid;
+  /* border-style: solid;
   border-bottom-color: gold;
-  border-bottom-width: 3px;
+  border-bottom-width: 3px; */
   text-align: center;
 `;
 export const SubHeaderText = styled.Text`
   margin-top: 5%;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 14px;
+  /* font-weight: bold; */
   letter-spacing: 1;
   color: gray;
   text-align: center;

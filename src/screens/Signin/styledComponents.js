@@ -22,16 +22,16 @@ export const HeaderText = styled.Text`
   font-weight: bold;
   letter-spacing: 1;
   color: white;
-  border-style: solid;
+  /* border-style: solid;
   border-bottom-color: gold;
-  border-bottom-width: 3px;
+  border-bottom-width: 3px; */
   text-align: center;
 `;
 export const AnimationView = styled.View`
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
-  margin-top: 64px;
+  margin-top: 50px;
   margin-left: 32px;
   /* height: 25%; */
 `;
@@ -65,4 +65,42 @@ export const ErrorText = styled.Text`
   font-size: 15px;
   /* text-align: center; */
   margin: 5% 5% 5% 5%;
+`;
+
+export const ActivityView = styled.View`
+  margin-top: 5%;
+`;
+
+export const SubHeaderText = styled.Text`
+  margin-top: 5%;
+  font-size: 12px;
+  /* font-weight: bold; */
+  letter-spacing: 1;
+  color: gray;
+  text-align: center;
+`;
+export const IconContainer = styled.View`
+  flex-direction: row;
+  height: 55px;
+  width: 100%;
+  background-color: gold;
+  /* padding-top: 10%; */
+  margin: 3% 0 0 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100;
+`;
+
+export const ButtonText = styled.Text`
+  /* justify-content: center; */
+  /* justify-self: auto; */
+  font-size: 20;
+  letter-spacing: 1;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: black;
+  padding-bottom: 3%;
+  padding-right: 10%;
+  margin-left: 3%;
 `;
