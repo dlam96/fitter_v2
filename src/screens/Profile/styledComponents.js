@@ -111,3 +111,117 @@ export const DescriptionInput = styled.TextInput`
   /* padding: 3% 0 5% 0; */
   /* margin: 10% 0 0 0; */
 `;
+export const SettingsContainer = styled.Modal`
+  z-index: 10;
+  /* background-color: red; */
+  width: 75%;
+  height: 50%;
+  align-self: center;
+  justify-content: center;
+`;
+export const SettingsWrapper = styled.View`
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.75);
+`;
+export const SettingsView = styled.View`
+  width: 100%;
+  height: 90%;
+  border-radius: 30;
+  background-color: black;
+  /* margin-top: 10%; */
+  align-self: center;
+  /* text-align: center; */
+`;
+export const LowerSettingsView = styled.View`
+  /* background-color: red; */
+  /* margin-top: 10%; */
+  padding-top: 2%;
+  height: 90%;
+  /* border-radius: 30; */
+`;
+export const SettingsHeading = styled.Text`
+  /* margin-top: 5%; */
+  font-size: 25px;
+  /* font-weight: bold; */
+  letter-spacing: 2;
+  color: gold;
+  text-align: center;
+`;
+export const SettingsSubHeading = styled.Text`
+  /* margin-top: 5%; */
+  font-size: 15px;
+  /* font-weight: bold; */
+  padding-left: 5%;
+  padding-top: 5%;
+  margin-bottom: 3%;
+  letter-spacing: 1;
+  color: gold;
+  text-align: left;
+`;
+
+export const SwitchContainer = styled.View`
+  flex: 0.6;
+  flex-direction: column;
+  width: 90%;
+  /* background-color: white; */
+  align-self: center;
+  /* margin-bottom: 3%; */
+  /* margin-top: 3%; */
+  /* marginvertical: 3;
+  marginhorizontal: 15;
+  backgroundcolor: "#252525";
+  borderradius: 8; */
+`;
+export const UserContainer = styled.View`
+  flex: 0.3;
+  flex-direction: column;
+  width: 90%;
+  /* background-color: white; */
+  align-self: center;
+  /* margin-bottom: 3%; */
+  /* margin-top: 3%; */
+  /* marginvertical: 3;
+marginhorizontal: 15;
+backgroundcolor: "#252525";
+borderradius: 8; */
+`;
+export const SliderContainer = styled.View`
+  /* flex: 0.9; */
+  flex-direction: row;
+  height: 10%;
+  width: 90%;
+  background-color: gray;
+  border-radius: 15;
+  align-self: center;
+  /* margin-bottom: 3%; */
+  /* margin-top: 3%; */
+  /* marginvertical: 3;
+  marginhorizontal: 15;
+  backgroundcolor: "#252525";
+  borderradius: 8; */
+`;
+export const SliderText = styled.Text`
+  color: gold;
+  font-size: 15px;
+  align-self: center;
+`;
+
+export const AgeContainer = styled.View`
+  /* flex: 0.9; */
+  flex-direction: row;
+  height: 10%;
+  width: 90%;
+  background-color: gray;
+  border-radius: 15;
+  align-self: center;
+  padding-left: 5%;
+  /* margin-bottom: 3%; */
+  /* margin-top: 3%; */
+  /* marginvertical: 3;
+  marginhorizontal: 15;
+  backgroundcolor: "#252525";
+  borderradius: 8; */
+`;

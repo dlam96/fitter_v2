@@ -2,14 +2,15 @@ import React from "react";
 import { Text } from "react-native";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import Profile from "../../screens/Profile";
+import Messages from "../../screens/Messages";
 
 import { Ionicons } from "@expo/vector-icons";
 
 const MainApp = createMaterialBottomTabNavigator(
   {
     // Loading: LoadingScreen,
-    Profile: {
-      screen: Profile,
+    Messages: {
+      screen: Messages,
       navigationOptions: {
         tabBarLabel: (
           <Text
@@ -28,7 +29,7 @@ const MainApp = createMaterialBottomTabNavigator(
         )
       }
     },
-    Second: {
+    Profile: {
       screen: Profile,
       navigationOptions: {
         tabBarLabel: (

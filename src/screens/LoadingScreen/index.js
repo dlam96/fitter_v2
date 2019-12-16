@@ -121,13 +121,18 @@ class LoadingScreen extends Component {
         { headers: { Authorization: this.props.token } }
       )
       .then(this.onResponse)
-      .catch(function(error) {
-        console.log("Error signing in @ Loading Screen " + error);
+      .catch(error => {
+        // if fail credentials, reject user and flash error message
+        console.log("Error @ onLogin in Loading Screen. " + error);
       });
     // if fail credentials, reject user and flash error message
-    this.sendBack("MainApp");
+    this.sendBack("SignIn");
     return;
   };
+  // componentDidCatch(error) {
+  //   console.log("Error signing in @ ComponentDidiCatch " + error);
+  //   this.sendBack("SignIn");
+  // }
   // If login successful, update the redux states for main App to use.
   onResponse = async response => {
     console.log("Response " + response.data);
@@ -154,7 +159,7 @@ class LoadingScreen extends Component {
       response.data.preferences.lowerAgeRange
     );
     // Direct to main app on success login
-    this.sendBack("SignUp");
+    this.sendBack("MainApp");
     return;
   };
 

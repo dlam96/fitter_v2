@@ -10,9 +10,11 @@ export const Container = styled.View`
 `;
 
 export const HeaderView = styled.View`
-  /* flex: 1; */
+  flex: 0.2;
+  height: 20%;
+  /* background-color: white; */
   /* border-bottom: 3px solid gold; */
-  /* padding-top: 40%; */
+  /* padding-top: 55%; */
   /* padding-bottom: 10%; */
   /* margin-bottom: 10%; */
 `;
@@ -22,13 +24,17 @@ export const HeaderText = styled.Text`
   font-weight: bold;
   letter-spacing: 1;
   color: white;
+  padding-top: 50%;
   /* border-style: solid;
   border-bottom-color: gold;
   border-bottom-width: 3px; */
   text-align: center;
 `;
 export const AnimationView = styled.View`
+  flex: 1;
   flex-direction: column;
+  background-color: white;
+  height: 50px;
   align-items: center;
   /* justify-content: center; */
   margin-top: 50px;

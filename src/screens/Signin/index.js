@@ -4,7 +4,8 @@ import {
   Keyboard,
   TouchableOpacity,
   ActivityIndicator,
-  View
+  View,
+  KeyboardAvoidingView
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Button, Input } from "../../components";
@@ -52,6 +53,7 @@ export default class Signin extends Component {
     this.onChangeText = this.onChangeText.bind(this);
     this.setModalVisible = this.setModalVisible.bind(this);
     this._getLocationAsync = this._getLocationAsync.bind(this);
+    this.validateEmail = this.validateEmail.bind(this);
   }
   componentDidMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
@@ -77,7 +79,7 @@ export default class Signin extends Component {
     // console.log(
     //   "Submitting: " + this.state.email + " and " + this.state.password
     // );
-    await this._getLocationAsync();
+
     // reset error flags
     this.setState({
       isLoading: false,
@@ -85,10 +87,15 @@ export default class Signin extends Component {
       errorAuth: false,
       modalVisible: false
     });
-    if (this.state.email == "" || this.state.password == "") {
+    if (
+      this.state.email == "" ||
+      this.state.password == "" ||
+      !this.validateEmail(this.state.email)
+    ) {
       this.setState({ errorAuth: true, modalVisible: true });
       return;
     }
+    await this._getLocationAsync();
     this.props.navigation.navigate("Loading", {
       request: "signin",
       email: this.state.email,
@@ -103,6 +110,20 @@ export default class Signin extends Component {
       [key]: value
     });
   };
+  validateEmail = text => {
+    console.log("Validating email: " + text);
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (reg.test(text) === false) {
+      console.log("Email is Not Correct");
+      // this.setState({ errorEmail: true });
+      return false;
+    } else {
+      // this.setState({ input: text });
+      console.log("Email is Correct");
+      return true;
+    }
+  };
+
   setModalVisible = visible => {
     this.setState({ modalVisible: visible });
   };
@@ -134,91 +155,100 @@ export default class Signin extends Component {
   };
   render() {
     return (
-      <TouchableWithoutFeedback
-        onPress={this._keyboardDismiss}
-        accessible={false}
-        touchSoundDisabled={true}
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={{ flex: 1, width: "100%", height: "100%" }}
       >
-        <Container>
-          <AnimationView>
-            <LottieView
-              source={treadmill}
-              autoPlay
-              style={{ width: 180, height: 180 }}
-              resizeMode="cover"
-            />
-          </AnimationView>
-          <HeaderView>
-            <HeaderText>
-              {/* <Ionicons name="ios-fitness" size={40} /> */}
-              Fitter
-            </HeaderText>
-          </HeaderView>
-          {/* Error Message */}
-          {this.state.errorAuth && (
-            <ErrorContainer
-              animationType="fade"
-              transparent={true}
-              visible={this.state.modalVisible}
-              onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
-              }}
-            >
-              <ErrorWrapper>
-                <TouchableOpacity
-                  onPress={() => {
-                    this.setModalVisible(!this.state.modalVisible);
-                  }}
-                >
-                  <ErrorView>
-                    <ErrorText>
-                      Invalid Email or Password.
-                      {"\n\n"}
-                      Tap to dismiss.
-                    </ErrorText>
-                  </ErrorView>
-                </TouchableOpacity>
-              </ErrorWrapper>
-            </ErrorContainer>
-          )}
-          {/* Custom text input, type is state (key) in onChangeText function */}
-          <Input
-            type="email"
-            value={this.state.email}
-            placeholder="Email"
-            onChangeText={this.onChangeText}
-            required
-          />
-          <Input
-            type="password"
-            value={this.state.password}
-            placeholder="Password"
-            onChangeText={this.onChangeText}
-            secureTextEntry
-            required
-          />
-          <ActivityView>
-            <SubHeaderText>
-              By tapping Sign In, you agree with our Terms of Service and
-              Privacy Policy
-            </SubHeaderText>
+        <TouchableWithoutFeedback
+          onPress={this._keyboardDismiss}
+          accessible={false}
+          touchSoundDisabled={true}
+        >
+          <Container>
+            {/* <AnimationView>
+              <LottieView
+                source={treadmill}
+                autoPlay
+                style={{ width: 180, height: 180 }}
+                resizeMode="cover"
+              />
+            </AnimationView> */}
+            <HeaderView></HeaderView>
 
-            {/* Custom Button */}
-            <TouchableOpacity onPress={this.onSubmit}>
-              <IconContainer>
-                <View>
-                  <ActivityIndicator
-                    size="large"
-                    color="black"
-                    animating={this.state.isLoading}
-                  />
-                </View>
-                <ButtonText>Sign In</ButtonText>
-              </IconContainer>
-            </TouchableOpacity>
-          </ActivityView>
-        </Container>
-      </TouchableWithoutFeedback>
+            {/* Custom text input, type is state (key) in onChangeText function */}
+            <View>
+              <HeaderText>
+                {/* <Ionicons name="ios-fitness" size={40} /> */}
+                Fitter
+              </HeaderText>
+              <Input
+                type="email"
+                value={this.state.email}
+                placeholder="Email"
+                onChangeText={this.onChangeText}
+                required
+              />
+              <Input
+                type="password"
+                value={this.state.password}
+                placeholder="Password"
+                onChangeText={this.onChangeText}
+                secureTextEntry
+                required
+              />
+            </View>
+
+            <ActivityView>
+              <SubHeaderText>
+                By tapping Sign In, you agree with our Terms of Service and
+                Privacy Policy
+              </SubHeaderText>
+
+              {/* Custom Button */}
+              <TouchableOpacity onPress={this.onSubmit}>
+                <IconContainer>
+                  <View>
+                    <ActivityIndicator
+                      size="large"
+                      color="black"
+                      animating={this.state.isLoading}
+                    />
+                  </View>
+                  <ButtonText>Sign In</ButtonText>
+                </IconContainer>
+              </TouchableOpacity>
+            </ActivityView>
+            {/* Error Message */}
+            {this.state.errorAuth && (
+              <ErrorContainer
+                animationType="fade"
+                transparent={true}
+                visible={this.state.modalVisible}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                }}
+              >
+                <ErrorWrapper>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setModalVisible(!this.state.modalVisible);
+                    }}
+                  >
+                    <ErrorView>
+                      <ErrorText>
+                        Invalid Email or Password.
+                        {"\n\n"}
+                        Tap to dismiss.
+                      </ErrorText>
+                    </ErrorView>
+                  </TouchableOpacity>
+                </ErrorWrapper>
+              </ErrorContainer>
+            )}
+            <View style={{ paddingBottom: "5%" }} />
+          </Container>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
 }
