@@ -9,7 +9,7 @@ const IntroFooter = ({ navigation }) => {
   const indexOfCurrentScreen = navigation.state.index;
   const nameOfScreen = index => navigation.state.routes[index].routeName;
   const nameOfNextScreen = () =>
-    indexOfCurrentScreen !== 2
+    indexOfCurrentScreen !== 5
       ? navigation.navigate(nameOfScreen(indexOfCurrentScreen + 1))
       : navigation.navigate("MainApp");
   // boolean if the index is current screen index then true
@@ -20,12 +20,12 @@ const IntroFooter = ({ navigation }) => {
         <Icon iconName="home" />
       </TouchableOpacity>
       <Tracker>
-        {[0, 1, 2].map(indexOfComp => (
+        {[0, 1, 2, 3, 4, 5].map(indexOfComp => (
           <Circle key={indexOfComp} color={trackerColor(indexOfComp)} />
         ))}
       </Tracker>
       <TouchableOpacity onPress={nameOfNextScreen}>
-        <Icon iconName={indexOfCurrentScreen === 2 ? "check" : "arrowright"} />
+        <Icon iconName={indexOfCurrentScreen === 5 ? "check" : "arrowright"} />
       </TouchableOpacity>
     </Container>
   );

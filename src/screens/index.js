@@ -1,6 +1,9 @@
 export { default as IntroOne } from "./IntroOne";
+export { default as IntroOneA } from "./IntroOneA";
 export { default as IntroTwo } from "./IntroTwo";
+export { default as IntroTwoA } from "./IntroTwoA";
 export { default as IntroThree } from "./IntroThree";
+export { default as IntroThreeA } from "./IntroThreeA";
 export { default as Signin } from "./Signin";
 export { default as Signup } from "./Signup";
 export { default as Profile } from "./Profile";

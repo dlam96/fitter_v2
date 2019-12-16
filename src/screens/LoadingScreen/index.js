@@ -125,7 +125,7 @@ class LoadingScreen extends Component {
         console.log("Error signing in @ Loading Screen " + error);
       });
     // if fail credentials, reject user and flash error message
-    this.sendBack("SignIn");
+    this.sendBack("MainApp");
     return;
   };
   // If login successful, update the redux states for main App to use.
@@ -181,8 +181,9 @@ class LoadingScreen extends Component {
   // if signup successful, update redux and navigate to app
   onVerify = async () => {
     this.props.signup();
+
     // To change to app route
-    this.sendBack("SignIn");
+    this.sendBack("MainApp");
   };
 
   render() {

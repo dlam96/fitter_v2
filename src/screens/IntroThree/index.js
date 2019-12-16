@@ -2,13 +2,13 @@ import React from "react";
 
 import { Intro } from "../../components";
 
-const animation = require("../../animations/dumbbell.json");
+const animation = require("../../animations/safety.json");
 
 const IntroThree = () => (
   <Intro
     animation={animation}
-    title="Title Three"
-    body="In aliquam sem fringilla ut morbi tincidunt. At elementum eu facilisis sed odio morbi quis commodo. Volutpat diam ut venenatis tellus in. Enim facilisis gravida neque convallis a cras semper auctor neque. Eget aliquet nibh praesent tristique magna sit amet purus gravida. Ipsum a arcu cursus vitae congue."
+    title="Safety Tips"
+    body="Meeting new people is exciting, but you should always be cautious when interacting with someone you don’t know. Use your best judgment and put your safety first, whether you are exchanging initial messages or meeting in person."
   />
 );
 export default IntroThree;
