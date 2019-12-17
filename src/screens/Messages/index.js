@@ -26,7 +26,7 @@ class Messages extends Component {
     // });
 
     socket.emit("connection", {
-      id: ""
+      id: "5df82e0fa67dc31d3d6253ba"
     });
 
     socket.on("connect_error", error => {
@@ -38,22 +38,24 @@ class Messages extends Component {
     socket.on("error", error => {
       console.log("Error in connections (Messages): " + error);
     });
-    socket.emit("chat_message", { message: "test" });
 
     console.log("after emit messages compDidMount");
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: "Hello developer",
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: "React Native",
-            avatar: "https://placeimg.com/140/140/any"
-          }
-        }
-      ]
+    //   this.setState({
+    //     messages: [
+    //       {
+    //         _id: 1,
+    //         text: "Hello developer",
+    //         createdAt: new Date(),
+    //         user: {
+    //           _id: 2,
+    //           name: "React Native",
+    //           avatar: "https://placeimg.com/140/140/any"
+    //         }
+    //       }
+    //     ]
+    //   });
+    socket.on("chat_message", messages => {
+      console.log("received a message from server " + messages);
     });
   }
 
@@ -62,6 +64,20 @@ class Messages extends Component {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages)
     }));
+
+    console.log("Message first line" + messages[0].text + "\n\n ");
+    const socket = this.props.socket;
+
+    // socket.emit(
+    //   "chat_message",
+    //   JSON.stringify({
+    //     sendUser: "5df82e0fa67dc31d3d6253ba",
+    //     receiveUser: "5df82e0fa67dc31d3d6253b9",
+    //     token:
+    //       "eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAYi5jb20iLCJpYXQiOjE1NzY1NDYwNzMsImV4cCI6MTU3OTEzODA3MywiYXVkIjoiaHR0cDovL0ZpdHRlci5jb20iLCJpc3MiOiJGaXR0ZXIgQ29ycCIsInN1YiI6Ik1haW4gQXV0aCJ9.RFgPPHVnBLlKo1XH-2UnPROZooZVr-n1V7ykrmj0F1Lxo_XSZu-icc7bmQEK70W99-5KO0_MxRtEINs-cl6vvwyXOM-I_VsjdkAzzvVKl8YCaDA2iRGVKlvvjpJ4jKLXS32j04GPeWEYjGtRLe6kj0EPmvfzSuXRcL9FjE6v1dw",
+    //     message: messages[0].text
+    //   })
+    // );
   }
 
   render() {
@@ -74,9 +90,10 @@ class Messages extends Component {
         <GiftedChat
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
-          messageIdGenerator={() => 2}
+          // messageIdGenerator={() => "5df82e0fa67dc31d3d6253b9"}
+          scrollToBottom
           user={{
-            _id: 1
+            _id: "5df82e0fa67dc31d3d6253ba"
           }}
         />
       </KeyboardAvoidingView>
@@ -88,7 +105,6 @@ const mapStateToProps = state => {
     "Messages redux: ",
     state.logged.userID + " token: " + state.logged.token
   );
-  console.log("hostname mapping redux " + state.hostname.hostName);
   return {
     // email: state.logged.email,
     socket: state.socket.socket,
