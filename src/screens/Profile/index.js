@@ -473,7 +473,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("Redux State", state);
+  // console.log("Redux State", state);
   // console.log('distance ' + state.preferences.distance);
   return {
     hostName: state.hostname.hostName,

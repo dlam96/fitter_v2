@@ -143,6 +143,7 @@ class LoadingScreen extends Component {
       userEmail: this.props.navigation.getParam("email", "")
     });
     this.props.login(
+      response.data.id,
       response.data.token,
       this.state.userEmail,
       response.data.firstName,

@@ -1,8 +1,10 @@
 import { LOG_IN, SIGN_UP, LOG_OUT } from "../actionTypes";
+
 // Authentication reducers for LOGIN/REGISTER
 export default function(
   // Default states
   state = {
+    userID: "",
     token: "",
     email: "",
     firstName: "",
@@ -18,6 +20,7 @@ export default function(
   switch (action.type) {
     case LOG_IN: {
       return {
+        userID: action.payload.userID,
         token: action.payload.token,
         email: action.payload.email,
         firstName: action.payload.firstName,
@@ -35,6 +38,7 @@ export default function(
     }
     case LOG_OUT: {
       return {
+        userID: "",
         token: "",
         firstName: "",
         lastName: "",

@@ -51,7 +51,7 @@ const MainApp = createMaterialBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "Profile",
+    initialRouteName: "Messages",
     shifting: true,
     activeColor: "black"
   }
