@@ -6,11 +6,20 @@ import {
   CUSTOM_PREF,
   ON_CONNECT,
   LOAD_START,
-  LOAD_STOP
+  LOAD_STOP,
+  LOAD_CARDS
 } from "./actionTypes";
 // Actions function defines the parameters, (action)type and payload
 // Action is the function which the reducer then sets the state new value from payload
 // Action -> Reducer
+// find reducer
+export const storeCards = data => ({
+  type: LOAD_CARDS,
+  payload: {
+    possibles: data
+  }
+});
+// socket reducer
 export const storeSocket = socket => ({
   type: ON_CONNECT,
   payload: {

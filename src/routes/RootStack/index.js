@@ -13,11 +13,11 @@ const SwitchNav = createSwitchNavigator(
   },
   {
     // Change route name to debug tab navs
-    initialRouteName: "Auth"
+    initialRouteName: "MainApp"
   }
 );
 const RootStack = createStackNavigator(
-  { AppIntroTab, SwitchNav },
+  { SwitchNav, AppIntroTab },
   { headerMode: "none" }
 );
 export default RootStack;

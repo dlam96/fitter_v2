@@ -25,9 +25,18 @@ const treadmill = require("../../animations/dumbell_alt.json");
 // Setup Redux
 // Redux
 import { connect } from "react-redux";
-import { login, logout, signup, setPref, resetPref } from "../../redux/actions";
+import {
+  login,
+  logout,
+  signup,
+  setPref,
+  resetPref,
+  storeCards
+} from "../../redux/actions";
 import { bindActionCreators } from "redux";
-// Setup Axios
+
+import Demo from "../../../assets/sampledata";
+
 class LoadingScreen extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +52,7 @@ class LoadingScreen extends Component {
     this.onSignup = this.onSignup.bind(this);
     // onVerify for Signup
     this.onVerify = this.onVerify.bind(this);
-
+    this.getPossibles = this.getPossibles.bind(this);
     // Get param from last screen that called Loading.
     // Make API call and respond as neccessary
     let req = this.props.navigation.getParam("request", "");
@@ -84,6 +93,11 @@ class LoadingScreen extends Component {
     } else if (req == "signout") {
       console.log("Came from profile screen");
       this.onSignOut();
+    }
+    // this request is to stall for the Cards to reload in Find screen
+    else if (req == "loadcards") {
+      console.log("Came from Find screen");
+      this.getPossibles();
     }
   }
   componentDidMount() {
@@ -191,7 +205,33 @@ class LoadingScreen extends Component {
     // To change to app route
     this.sendBack("MainApp");
   };
-
+  // Get cards to match for find screen
+  getPossibles = async () => {
+    const axios = require("axios");
+    console.log("In getPossibles");
+    // console.log("In ldScn, storing in redux: " + JSON.stringify(Demo));
+    await this.props.storeCards(Demo);
+    // Demo stimulate good response from server
+    this.sendBack("Find");
+    // await axios
+    //   .get(this.props.hostName + "/possibles", {
+    //     headers: { Authorization: this.props.token }
+    //   })
+    //   .then(response => {
+    //     console.log("Got back cards json (LoadingScn) " + response.data);
+    //     // this.setState({
+    //     //   possibles: response.data,
+    //     //   arrayLen: response.data.length - 1
+    //     // });
+    //     this.sendBack("Find", {
+    //       possibles: response.data,
+    //       arrayLen: response.data.length - 1
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.error(error.message);
+    //   });
+  };
   render() {
     return (
       <Container>
@@ -212,10 +252,11 @@ class LoadingScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("LoadingScrn redux: ", state);
+  // console.log("LoadingScrn redux: ", state);
   return {
     // email: state.logged.email,
-    hostName: state.hostname.hostName
+    hostName: state.hostname.hostName,
+    token: state.logged.token
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -225,7 +266,8 @@ const mapDispatchToProps = dispatch => {
       logout,
       signup,
       setPref,
-      resetPref
+      resetPref,
+      storeCards
     },
     dispatch
   );

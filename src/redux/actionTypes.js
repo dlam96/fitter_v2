@@ -6,3 +6,4 @@ export const CUSTOM_PREF = "CUSTOM_PREF";
 export const LOAD_START = "LOAD_START";
 export const LOAD_STOP = "LOAD_STOP";
 export const ON_CONNECT = "ON_CONNECT";
+export const LOAD_CARDS = "LOAD_CARDS";

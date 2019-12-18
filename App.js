@@ -13,17 +13,12 @@ import io from "socket.io-client";
 let Navigation = createAppContainer(RootStack);
 class App extends Component {
   componentDidMount() {
-    // let manager = new Manager("https://www.fitter.best/socket.io/");
-    // let socket = manager.socket("/");
-    // socket.connect();
-
     let socket = io("http://www.fitter.best:4200", {
       transport: ["websocket"]
     });
 
     socket.on("connect", () => {
       console.log("Connect to socket in App ");
-      // socket.emit("chat_message", "this is from client side");
     });
     socket.on("connect_error", error => {
       console.log("Connect error in connections (App): " + error);
@@ -37,7 +32,7 @@ class App extends Component {
 
     store.dispatch(storeSocket(socket));
 
-    console.log("app mounted");
+    // console.log("app mounted");
   }
   render() {
     return (

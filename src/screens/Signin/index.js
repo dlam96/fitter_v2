@@ -224,9 +224,6 @@ export default class Signin extends Component {
                 animationType="fade"
                 transparent={true}
                 visible={this.state.modalVisible}
-                onRequestClose={() => {
-                  Alert.alert("Modal has been closed.");
-                }}
               >
                 <ErrorWrapper>
                   <TouchableOpacity
